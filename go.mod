@@ -1,4 +1,4 @@
-module HomeGuard
+module github.com/p3ddd/HomeGuard
 
 go 1.24.0
 

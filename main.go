@@ -1,9 +1,6 @@
 package main
 
 import (
-	"HomeGuard/device"
-	"HomeGuard/listener"
-	"HomeGuard/wol"
 	"context"
 	"flag"
 	"log/slog"
@@ -12,6 +9,10 @@ import (
 	"sync"
 	"syscall"
 	"time"
+
+	"github.com/p3ddd/HomeGuard/device"
+	"github.com/p3ddd/HomeGuard/listener"
+	"github.com/p3ddd/HomeGuard/wol"
 )
 
 var (

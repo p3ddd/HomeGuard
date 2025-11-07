@@ -107,6 +107,7 @@ logs/
 
 # Configuration files (keep example files)
 config.yaml
+devices.yaml
 *.local.yaml
 *.local.yml
 

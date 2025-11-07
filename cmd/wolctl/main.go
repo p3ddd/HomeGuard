@@ -98,7 +98,7 @@ func sendWakeUpRequest(serverURL string, req WakeUpRequest) error {
 	if err != nil {
 		return fmt.Errorf("failed to send request: %w", err)
 	}
-	defer resp.Body.Close()
+	defer func() { _ = resp.Body.Close() }()
 
 	// Check response
 	if resp.StatusCode != http.StatusOK {

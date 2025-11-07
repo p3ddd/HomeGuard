@@ -89,7 +89,7 @@ func (l *HTTPListener) Start(ctx context.Context, wakeUpChan chan<- WakeUpReques
 				"mac", request.Mac,
 				"broadcast", request.Broadcast)
 			w.WriteHeader(http.StatusOK)
-			w.Write([]byte("Wakeup request received"))
+			_, _ = w.Write([]byte("Wakeup request received"))
 		case <-ctx.Done():
 			l.logger().Info("Context canceled")
 			http.Error(w, "Server shutting down", http.StatusServiceUnavailable)
@@ -99,7 +99,7 @@ func (l *HTTPListener) Start(ctx context.Context, wakeUpChan chan<- WakeUpReques
 	// Health check endpoint
 	mux.HandleFunc("/health", func(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusOK)
-		w.Write([]byte("OK"))
+		_, _ = w.Write([]byte("OK"))
 	})
 
 	l.mu.Lock()

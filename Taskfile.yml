@@ -29,7 +29,7 @@ tasks:
     cmds:
       - echo "Building {{.SERVER_BINARY}}..."
       - go build -ldflags="{{.LDFLAGS}}" -o {{.SERVER_BINARY}} .
-      - echo "✓ Server build complete!"
+      - echo '✓ Server build complete!'
 
   build:client:
     desc: Build the client tool
@@ -42,7 +42,7 @@ tasks:
     cmds:
       - echo "Building {{.CLIENT_BINARY}}..."
       - go build -ldflags="{{.LDFLAGS}}" -o {{.CLIENT_BINARY}} ./cmd/wolctl/
-      - echo "✓ Client build complete!"
+      - echo '✓ Client build complete!'
 
   run:
     desc: Run the server application
@@ -57,14 +57,14 @@ tasks:
       - go clean
       - rm -f {{.SERVER_BINARY}} {{.CLIENT_BINARY}}
       - rm -rf dist/ build/
-      - echo "✓ Clean complete!"
+      - echo '✓ Clean complete!'
 
   test:
     desc: Run tests
     cmds:
       - echo "Running tests..."
       - go test -v -race -coverprofile=coverage.txt -covermode=atomic ./...
-      - echo "✓ Tests complete!"
+      - echo '✓ Tests complete!'
 
   test:short:
     desc: Run tests without race detector
@@ -76,14 +76,14 @@ tasks:
     cmds:
       - go test -v -coverprofile=coverage.txt -covermode=atomic ./...
       - go tool cover -html=coverage.txt -o coverage.html
-      - echo "✓ Coverage report generated: coverage.html"
+      - echo "✓ Coverage report generated -> coverage.html"
 
   lint:
     desc: Run linter
     cmds:
       - echo "Running linter..."
       - golangci-lint run
-      - echo "✓ Lint complete!"
+      - echo '✓ Lint complete!'
 
   fmt:
     desc: Format code
@@ -91,14 +91,14 @@ tasks:
       - echo "Formatting code..."
       - go fmt ./...
       - goimports -w .
-      - echo "✓ Format complete!"
+      - echo '✓ Format complete!'
 
   tidy:
     desc: Tidy go.mod
     cmds:
       - echo "Tidying go.mod..."
       - go mod tidy
-      - echo "✓ Tidy complete!"
+      - echo '✓ Tidy complete!'
 
   install:
     desc: Install binaries to system
@@ -108,7 +108,7 @@ tasks:
       - echo "Installing {{.SERVER_BINARY}} and {{.CLIENT_BINARY}} to {{.INSTALL_PATH}}..."
       - cp {{.SERVER_BINARY}} {{.INSTALL_PATH}}/
       - cp {{.CLIENT_BINARY}} {{.INSTALL_PATH}}/
-      - echo "✓ Install complete!"
+      - echo '✓ Install complete!'
 
   uninstall:
     desc: Uninstall binaries from system
@@ -116,7 +116,7 @@ tasks:
       - echo "Uninstalling {{.SERVER_BINARY}} and {{.CLIENT_BINARY}}..."
       - rm -f {{.INSTALL_PATH}}/{{.SERVER_BINARY}}
       - rm -f {{.INSTALL_PATH}}/{{.CLIENT_BINARY}}
-      - echo "✓ Uninstall complete!"
+      - echo '✓ Uninstall complete!'
 
   config:
     desc: Create config from example
@@ -124,9 +124,9 @@ tasks:
       - |
         if [ ! -f config.yaml ]; then
           cp config.example.yaml config.yaml
-          echo "✓ Created config.yaml from example"
+          echo '✓ Created config.yaml from example'
         else
-          echo "⚠ config.yaml already exists"
+          echo '⚠ config.yaml already exists'
         fi
 
   dev:
@@ -140,38 +140,38 @@ tasks:
     cmds:
       - echo "Building Docker image..."
       - docker build -t homeguard:latest .
-      - echo "✓ Docker image built!"
+      - echo '✓ Docker image built!'
 
   docker:run:
     desc: Run Docker container
     cmds:
-      - docker run --rm --network host -v $(pwd)/devices.yaml:/app/devices.yaml:ro homeguard:latest
+      - docker run --rm --network host -v $(pwd)/config.yaml:/app/config.yaml:ro homeguard:latest
 
   docker:up:
     desc: Start Docker Compose services
     cmds:
       - docker-compose up -d
-      - echo "✓ Services started!"
+      - echo '✓ Services started!'
 
   docker:down:
     desc: Stop Docker Compose services
     cmds:
       - docker-compose down
-      - echo "✓ Services stopped!"
+      - echo '✓ Services stopped!'
 
   release:
     desc: Create a release build
     cmds:
       - echo "Creating release build..."
       - goreleaser release --clean
-      - echo "✓ Release complete!"
+      - echo '✓ Release complete!'
 
   release:snapshot:
     desc: Create a snapshot release (no push)
     cmds:
       - echo "Creating snapshot release..."
       - goreleaser release --snapshot --clean
-      - echo "✓ Snapshot release complete!"
+      - echo '✓ Snapshot release complete!'
 
   all:
     desc: Run all checks (fmt, lint, test, build)

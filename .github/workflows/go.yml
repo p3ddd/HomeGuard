@@ -2,16 +2,14 @@ name: Go CI
 
 on:
   push:
-    branches: [ main, master, develop ]
+    tags:
+      - 'v*'
   pull_request:
     branches: [ main, master, develop ]
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        go-version: ['1.23', '1.24', '1.25']
 
     steps:
     - uses: actions/checkout@v4
@@ -19,7 +17,7 @@ jobs:
     - name: Set up Go
       uses: actions/setup-go@v5
       with:
-        go-version: ${{ matrix.go-version }}
+        go-version: '1.25'
 
     - name: Display Go version
       run: go version

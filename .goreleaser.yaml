@@ -58,14 +58,32 @@ snapshot:
 
 changelog:
   sort: asc
+  use: github
+  groups:
+    - title: '✨ Features'
+      regexp: '^.*?feat(\([[:word:]]+\))??!?:.+$'
+      order: 0
+    - title: '🐛 Bug Fixes'
+      regexp: '^.*?fix(\([[:word:]]+\))??!?:.+$'
+      order: 1
+    - title: '🔧 Refactoring'
+      regexp: '^.*?refactor(\([[:word:]]+\))??!?:.+$'
+      order: 2
+    - title: '📝 Documentation'
+      regexp: '^.*?docs(\([[:word:]]+\))??!?:.+$'
+      order: 3
+    - title: '🏗️ Build & CI'
+      regexp: '^.*?(build|ci)(\([[:word:]]+\))??!?:.+$'
+      order: 4
+    - title: 'Other Changes'
+      order: 999
   filters:
     exclude:
-      - '^docs:'
       - '^test:'
       - '^chore:'
       - 'README'
-      - Merge pull request
-      - Merge branch
+      - 'Merge pull request'
+      - 'Merge branch'
 
 release:
   github:

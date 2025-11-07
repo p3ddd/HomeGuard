@@ -33,7 +33,7 @@ builds:
 
 archives:
   - id: homeguard
-    format: tar.gz
+    formats: [tar.gz]
     name_template: >-
       {{ .ProjectName }}_
       {{- title .Os }}_
@@ -43,7 +43,7 @@ archives:
       {{- if .Arm }}v{{ .Arm }}{{ end }}
     format_overrides:
       - goos: windows
-        format: zip
+        formats: [zip]
     files:
       - README.md
       - README_ZH.md
@@ -51,45 +51,48 @@ archives:
       - config.example.yaml
 
 checksum:
-  name_template: 'checksums.txt'
+  name_template: "checksums.txt"
 
 snapshot:
-  name_template: "{{ incpatch .Version }}-next"
+  version_template: "{{ incpatch .Version }}-next"
 
 changelog:
   sort: asc
   use: github
+  abbrev: 7
+  
+  # 格式：- hash: message (@username)
+  # .SHA - commit hash
+  # .Message - 提交信息第一行
+  # .AuthorUsername - GitHub 用户名（需要 use: github）
+  format: "- {{.SHA}}: {{.Message}}"
+  
   groups:
-    - title: '✨ Features'
+    - title: "Features"
       regexp: '^.*?feat(\([[:word:]]+\))??!?:.+$'
       order: 0
-    - title: '🐛 Bug Fixes'
+    - title: "Bug Fixes"
       regexp: '^.*?fix(\([[:word:]]+\))??!?:.+$'
       order: 1
-    - title: '🔧 Refactoring'
-      regexp: '^.*?refactor(\([[:word:]]+\))??!?:.+$'
-      order: 2
-    - title: '📝 Documentation'
-      regexp: '^.*?docs(\([[:word:]]+\))??!?:.+$'
-      order: 3
-    - title: '🏗️ Build & CI'
-      regexp: '^.*?(build|ci)(\([[:word:]]+\))??!?:.+$'
-      order: 4
-    - title: 'Other Changes'
+    - title: "Other Changes"
       order: 999
   filters:
     exclude:
-      - '^test:'
-      - '^chore:'
-      - 'README'
-      - 'Merge pull request'
-      - 'Merge branch'
+      - "^test:"
+      - "^chore:"
+      - "Merge pull request"
+      - "Merge branch"
 
 release:
   github:
     owner: p3ddd
     name: HomeGuard
-  draft: false
-  prerelease: auto
-  name_template: "{{.ProjectName}}-v{{.Version}}"
 
+  # 隐私保护：先生成草稿，审查后再手动发布
+  draft: true
+  replace_existing_draft: true
+
+  prerelease: auto
+  make_latest: true
+
+  name_template: "{{.ProjectName}}-v{{.Version}}"

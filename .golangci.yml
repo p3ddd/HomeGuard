@@ -1,6 +1,6 @@
 run:
   timeout: 5m
-  go: '1.25'
+  go: '1.23'
 
 linters:
   enable:
@@ -18,6 +18,7 @@ linters:
     - unconvert
     - unparam
     - gosec
+    - shadow
 
 linters-settings:
   gofmt:
@@ -25,7 +26,9 @@ linters-settings:
   goimports:
     local-prefixes: HomeGuard
   govet:
-    check-shadowing: true
+    settings:
+      shadow:
+        strict: true
   errcheck:
     check-type-assertions: true
     check-blank: true
@@ -38,7 +41,8 @@ issues:
         - gosec
 
 output:
-  format: colored-line-number
+  formats:
+    - format: colored-line-number
   print-issued-lines: true
   print-linter-name: true
 

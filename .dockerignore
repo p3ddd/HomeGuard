@@ -1,0 +1,51 @@
+# Git
+.git
+.gitignore
+
+# Build artifacts
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+homeguard
+HomeGuard
+
+# IDE
+.vscode
+.idea
+*.swp
+*.swo
+
+# Logs
+*.log
+logs/
+
+# Config files (use mounted volumes instead)
+devices.yaml
+config.yaml
+
+# Environment
+.env
+.env.local
+
+# Documentation
+README.md
+LICENSE
+
+# CI/CD
+.github
+.golangci.yml
+.goreleaser.yaml
+
+# Docker
+docker-compose.yml
+Dockerfile
+
+# Temporary
+tmp/
+temp/
+*.tmp
+

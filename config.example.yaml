@@ -1,0 +1,46 @@
+# HomeGuard Configuration Example
+# Copy this file to config.yaml and fill in your values
+
+# Device list
+devices:
+  - name: desktop
+    mac: "00:11:22:33:44:55"
+    broadcast: "192.168.1.255"
+    description: "My desktop computer / 我的台式机"
+    
+  - name: laptop
+    mac: "aa:bb:cc:dd:ee:ff"
+    broadcast: "192.168.1.255"
+    description: "Work laptop / 工作笔记本"
+    
+  - name: server
+    mac: "11:22:33:44:55:66"
+    broadcast: "192.168.1.255"
+    description: "Home server / 家庭服务器"
+
+# Server configuration
+server:
+  http:
+    enabled: true      # Enable HTTP listener
+    addr: ":7092"      # HTTP listen address
+  
+  # MQTT configuration (optional, for cloud MQTT service like Bemfa)
+  mqtt:
+    enabled: false                        # Enable MQTT listener
+    broker: "tcp://mqtt.bemfa.com:9501"  # MQTT broker address
+    topic: "homeguard001"                # MQTT topic to subscribe
+    client_id: "homeguard-client"        # MQTT client ID
+    username: ""                          # MQTT username (if required)
+    password: ""                          # MQTT password (if required)
+    qos: 1                                # MQTT QoS level (0, 1, or 2)
+  
+  # Gotify configuration (TODO: future implementation)
+  # gotify:
+  #   enabled: false
+  #   url: "https://gotify.example.com"
+  #   token: "your-app-token"
+
+# Logging
+log:
+  level: "info"  # Log level: debug, info, warn, error
+

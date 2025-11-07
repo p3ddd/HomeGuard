@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  homeguard:
+    build: .
+    container_name: homeguard
+    restart: unless-stopped
+    network_mode: host  # Required for WOL broadcast packets
+    volumes:
+      - ./config.yaml:/app/config.yaml:ro
+    environment:
+      - LOG_LEVEL=info

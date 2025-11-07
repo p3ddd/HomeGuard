@@ -1,0 +1,45 @@
+# HomeGuard WOL Service - Device Configuration
+# Configure your network devices here for easy wakeup by name
+
+devices:
+  # Example desktop computer
+  - name: desktop
+    mac: "00:11:22:33:44:55"
+    broadcast: "192.168.1.255"
+    description: "主桌面电脑"
+
+  # Example laptop
+  - name: laptop
+    mac: "aa:bb:cc:dd:ee:ff"
+    broadcast: "192.168.1.255"
+    description: "笔记本电脑"
+
+  # Example server
+  - name: server
+    mac: "11:22:33:44:55:66"
+    broadcast: "192.168.1.255"
+    description: "家庭服务器"
+
+# Usage examples:
+# 
+# 1. Wake by device name (HTTP):
+#    POST http://localhost:7091/wakeup
+#    Content-Type: application/json
+#    {"device": "desktop"}
+#
+#    Or with query parameter:
+#    POST http://localhost:7091/wakeup?device=desktop
+#
+# 2. Wake by MAC address (HTTP):
+#    POST http://localhost:7091/wakeup
+#    Content-Type: application/json
+#    {"mac": "00:11:22:33:44:55", "broadcast": "192.168.1.255"}
+#
+# 3. Wake by device name (MQTT):
+#    Publish to topic (default: homeguard/wakeup):
+#    {"device": "desktop"}
+#
+# 4. Wake by MAC address (MQTT):
+#    Publish to topic (default: homeguard/wakeup):
+#    {"mac": "00:11:22:33:44:55", "broadcast": "192.168.1.255"}
+

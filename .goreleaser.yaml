@@ -46,8 +46,9 @@ archives:
         format: zip
     files:
       - README.md
+      - README_ZH.md
       - LICENSE
-      - devices.example.yaml
+      - config.example.yaml
 
 checksum:
   name_template: 'checksums.txt'
